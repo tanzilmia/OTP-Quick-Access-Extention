@@ -21,10 +21,15 @@ export function collectPlainTextFromPayload(payload) {
   if (payload.mimeType === 'text/html' && payload.body?.data) {
     const html = decodeBase64Url(payload.body.data)
     out += html
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, ' ')
-      .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, ' ')
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '\n')
+      .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '\n')
+      .replace(
+        /<\/?(?:div|p|br|li|tr|td|th|h[1-6]|table|tbody|thead)\b[^>]*>/gi,
+        '\n',
+      )
       .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
+      .replace(/[ \t]+/g, ' ')
+      .replace(/\n\s*\n+/g, '\n')
       .trim()
   }
   if (payload.parts?.length) {

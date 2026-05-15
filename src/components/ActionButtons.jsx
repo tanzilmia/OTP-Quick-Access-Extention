@@ -1,19 +1,33 @@
 import './ActionButtons.css'
 
 export function ActionButtons({
+  gmailConnected,
+  connecting,
   onConnectGmail,
+  onDisconnectGmail,
   onRefreshOtps,
   refreshDisabled,
 }) {
   return (
     <div className="root">
-      <button
-        type="button"
-        className="btnPrimary"
-        onClick={onConnectGmail}
-      >
-        Connect Gmail
-      </button>
+      {!gmailConnected ? (
+        <button
+          type="button"
+          className="btnPrimary"
+          onClick={onConnectGmail}
+          disabled={connecting}
+        >
+          {connecting ? 'Connecting…' : 'Connect Gmail'}
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="btnDisconnect"
+          onClick={onDisconnectGmail}
+        >
+          Disconnect Gmail
+        </button>
+      )}
       <button
         type="button"
         className="btnSecondary"

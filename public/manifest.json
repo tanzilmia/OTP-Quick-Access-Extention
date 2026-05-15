@@ -23,7 +23,7 @@
   "permissions": ["identity", "storage", "alarms"],
   "host_permissions": ["https://www.googleapis.com/*"],
   "oauth2": {
-    "client_id": "YOUR_GOOGLE_OAUTH_CLIENT_ID",
+    "client_id": "560091804566-s9e6m8fd54tha37epmv4bhmkdh82glpr.apps.googleusercontent.com",
     "scopes": ["https://www.googleapis.com/auth/gmail.readonly"]
   }
 }

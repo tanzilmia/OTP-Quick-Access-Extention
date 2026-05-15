@@ -39,6 +39,35 @@ It does **not** send mail, delete mail, or change your account. It only **looks 
 
 ---
 
+## Technologies used in this project
+
+The extension is built as a **Chrome Extension** using **Manifest V3** (modern extension format with a small background **service worker**).
+
+**Interface**
+
+- **React** — UI library used to build the popup screens (connection card, list of codes, buttons, theme toggle).
+- **JavaScript (ES modules) + JSX** — Source code style for components and logic.
+- **CSS** — Layout and styling; **light/dark** modes use **CSS custom properties** (variables) switched from the app.
+
+**Build**
+
+- **Vite** — Bundles the React app into static files (`HTML`, `JS`, `CSS`) that Chrome loads inside the popup.
+
+**Chrome & Google**
+
+- **`chrome.identity`** — Lets the extension request a Google **OAuth** access token after you approve sign-in (no separate login server in this project).
+- **Gmail API** — HTTPS requests to Google’s servers to **search** recent messages and **fetch** message content; only **read-only** access is requested.
+
+**Storage**
+
+- **`localStorage`** (in the popup) — Saves your **theme** choice (light or dark) so it stays next time you open the popup.
+
+**Developer tooling** (for people working on the code)
+
+- **ESLint** — Linting for JavaScript/React code quality.
+
+---
+
 ## Tips
 
 - If a code **does not appear**, it may not match the search words yet, or the message may use an unusual format. You can still open **Gmail** as usual.

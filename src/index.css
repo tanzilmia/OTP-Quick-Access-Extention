@@ -1,25 +1,4 @@
 :root {
-  color-scheme: dark;
-
-  /* Emerald auth UI (matches reference) */
-  --bg: #090c0b;
-  --bg-panel: #0f1614;
-  --surface: #141f1c;
-  --surface-hover: #1a2924;
-  --text: #f4faf8;
-  --text-muted: #8b9d96;
-  --text-dim: #5c6f67;
-  --border: #243530;
-  --border-strong: rgba(16, 185, 129, 0.45);
-
-  --accent: #10b981;
-  --accent-hover: #34d399;
-  --accent-soft: rgba(16, 185, 129, 0.12);
-  --accent-muted: rgba(16, 185, 129, 0.22);
-
-  --danger-bg: rgba(239, 68, 68, 0.12);
-  --danger-text: #f87171;
-
   --radius: 10px;
   --radius-sm: 8px;
   --radius-icon: 8px;
@@ -32,6 +11,72 @@
     sans-serif;
   font-size: 13px;
   line-height: 1.4;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #090c0b;
+  --bg-panel: #0f1614;
+  --surface: #141f1c;
+  --surface-hover: #1a2924;
+  --text: #f4faf8;
+  --text-muted: #8b9d96;
+  --text-dim: #5c6f67;
+  --border: #243530;
+  --border-strong: rgba(16, 185, 129, 0.45);
+  --accent-ring: rgba(16, 185, 129, 0.35);
+
+  --accent: #10b981;
+  --accent-hover: #34d399;
+  --accent-soft: rgba(16, 185, 129, 0.12);
+  --accent-muted: rgba(16, 185, 129, 0.22);
+
+  --danger-bg: rgba(239, 68, 68, 0.12);
+  --danger-text: #f87171;
+
+  --gcard-gradient: linear-gradient(165deg, #142922 0%, var(--surface) 55%);
+  --otp-latest-bg: linear-gradient(165deg, #162924 0%, var(--surface) 45%);
+  --otp-latest-shadow: 0 0 0 1px rgba(16, 185, 129, 0.05),
+    0 4px 14px rgba(0, 0, 0, 0.28);
+  --otp-past-opacity: 0.82;
+
+  --empty-fill: rgba(15, 22, 20, 0.45);
+
+  color: var(--text);
+  background: var(--bg);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f6f8f7;
+  --bg-panel: #ffffff;
+  --surface: #eef2f0;
+  --surface-hover: #e4eae7;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --border: #d4ddd9;
+  --border-strong: rgba(16, 185, 129, 0.5);
+  --accent-ring: rgba(16, 185, 129, 0.45);
+
+  --accent: #059669;
+  --accent-hover: #047857;
+  --accent-soft: rgba(16, 185, 129, 0.14);
+  --accent-muted: rgba(16, 185, 129, 0.24);
+
+  --danger-bg: rgba(239, 68, 68, 0.1);
+  --danger-text: #dc2626;
+
+  --gcard-gradient: linear-gradient(165deg, #ecfdf5 0%, var(--surface) 100%);
+  --otp-latest-bg: linear-gradient(165deg, #ecfdf5 0%, var(--bg-panel) 55%);
+  --otp-latest-shadow: 0 0 0 1px rgba(16, 185, 129, 0.12),
+    0 4px 14px rgba(15, 23, 42, 0.08);
+  --otp-past-opacity: 1;
+
+  --empty-fill: rgba(241, 245, 243, 0.95);
+
   color: var(--text);
   background: var(--bg);
 }

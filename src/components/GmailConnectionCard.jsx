@@ -17,10 +17,9 @@ export function GmailConnectionCard({
             <GoogleMark className="gcard-google-svg" />
           </div>
           <div className="gcard-copy">
-            <p className="gcard-status-title">Gmail not connected</p>
-            <p className="gcard-status-tag">
+            <p className="gcard-status-line gcard-status-line-off">
               <span className="gcard-dot gcard-dot-off" aria-hidden />
-              Inactive
+              Not connected
             </p>
           </div>
           <div className="gcard-actions">
@@ -43,10 +42,9 @@ export function GmailConnectionCard({
       <div className="gcard-inner">
         <GoogleMark className="gcard-google-svg" />
         <div className="gcard-copy">
-          <p className="gcard-status-title">Gmail connected</p>
-          <p className="gcard-status-tag gcard-status-tag-live">
+          <p className="gcard-status-line gcard-status-line-live">
             <span className="gcard-dot" aria-hidden />
-            Active
+            Connected
           </p>
         </div>
         <div className="gcard-actions">

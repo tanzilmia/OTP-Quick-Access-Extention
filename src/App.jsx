@@ -1,13 +1,15 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getInteractiveAuthToken, removeCachedAuthToken } from './auth/googleIdentity'
 import { fetchRecentOtps } from './gmail/fetchRecentOtps'
 import { ErrorBanner } from './components/ErrorBanner'
 import { GmailConnectionCard } from './components/GmailConnectionCard'
 import { Header } from './components/Header'
 import { OtpList } from './components/OtpList'
+import { commitTheme, getStoredTheme } from './theme/themeStorage'
 import './App.css'
 
 export default function App() {
+  const [theme, setTheme] = useState(() => getStoredTheme())
   const [authToken, setAuthToken] = useState(null)
   const [connecting, setConnecting] = useState(false)
   const [otps, setOtps] = useState([])
@@ -77,9 +79,17 @@ export default function App() {
     setError(null)
   }, [])
 
+  useEffect(() => {
+    commitTheme(theme)
+  }, [theme])
+
+  const toggleTheme = useCallback(() => {
+    setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
+  }, [])
+
   return (
     <div className="app">
-      <Header />
+      <Header theme={theme} onToggleTheme={toggleTheme} />
       <GmailConnectionCard
         connected={gmailConnected}
         connecting={connecting}

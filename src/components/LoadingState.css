@@ -9,7 +9,7 @@
   font-weight: 500;
   border: 1px dashed var(--border);
   border-radius: var(--radius);
-  background: rgba(15, 22, 20, 0.45);
+  background: var(--empty-fill);
 }
 
 .spinner {

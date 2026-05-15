@@ -3,7 +3,7 @@
   text-align: center;
   border: 1px dashed var(--border);
   border-radius: var(--radius);
-  background: rgba(15, 22, 20, 0.45);
+  background: var(--empty-fill);
   color: var(--text-muted);
   font-size: 12px;
   font-weight: 500;

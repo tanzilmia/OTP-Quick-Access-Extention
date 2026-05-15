@@ -1,7 +1,8 @@
-import { IconGear, IconKey } from './icons'
+import { IconKey, IconMoon, IconSun } from './icons'
 import './Header.css'
 
-export function Header() {
+export function Header({ theme, onToggleTheme }) {
+  const isDark = theme === 'dark'
   return (
     <header className="hdr">
       <div className="hdr-brand">
@@ -16,11 +17,15 @@ export function Header() {
       <button
         type="button"
         className="hdr-settings"
-        aria-label="Settings"
-        title="Coming soon"
-        onClick={() => {}}
+        aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        title={isDark ? 'Light mode' : 'Dark mode'}
+        onClick={onToggleTheme}
       >
-        <IconGear className="hdr-settings-icon" />
+        {isDark ? (
+          <IconSun className="hdr-settings-icon" />
+        ) : (
+          <IconMoon className="hdr-settings-icon" />
+        )}
       </button>
     </header>
   )

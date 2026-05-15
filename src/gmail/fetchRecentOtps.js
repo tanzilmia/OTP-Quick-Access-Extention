@@ -15,6 +15,11 @@ export async function fetchRecentOtps(token) {
   const detailPromises = stubs.map(({ id }) => getMessageFull(token, id))
   const messages = await Promise.all(detailPromises)
 
+  console.log(
+    '[OTP Quick Access] All fetched emails (full message objects):',
+    messages,
+  )
+
   const entries = messages
     .map(messageToOtpEntry)
     .filter(Boolean)

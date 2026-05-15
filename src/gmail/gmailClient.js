@@ -22,7 +22,6 @@ export async function gmailFetchJson(url, token) {
       body?.error?.message ||
       (typeof body === 'string' ? body : null) ||
       `${res.status} ${res.statusText}`
-    console.error('[OTP Quick Access] Gmail API error:', res.status, body)
     throw new Error(msg)
   }
 

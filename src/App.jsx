@@ -25,7 +25,6 @@ export default function App() {
       const entries = await fetchRecentOtps(token)
       setOtps(entries)
     } catch (err) {
-      console.error('[OTP Quick Access] Failed to load OTPs from Gmail:', err)
       const message = err instanceof Error ? err.message : String(err)
       setError(message)
       setOtps([])
@@ -42,7 +41,6 @@ export default function App() {
       if (!token) {
         throw new Error('No OAuth token returned.')
       }
-      console.log('[OTP Quick Access] Gmail auth token:', token)
       setAuthToken(token)
       await loadOtpsFromGmail(token)
     } catch (err) {

@@ -87,16 +87,46 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 body {
   margin: 0;
   min-width: 360px;
   max-width: 360px;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   background: var(--bg);
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 #root {
   min-height: 100%;
   background: var(--bg);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#root::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 button {

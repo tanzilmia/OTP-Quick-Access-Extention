@@ -17,7 +17,7 @@ It does **not** send mail, delete mail, or change your account. It only **looks 
    Click the extension **icon** next to the address bar. The popup must be opened this way so Gmail sign-in works correctly.
 
 3. **Connect Gmail**  
-   The first time, choose **Connect Gmail** (or equivalent). Chrome opens Google’s permission screen. Approve access so the extension can **read** your mail at the level shown (read-only Gmail scope).
+   The first time, choose **Connect Gmail** (or equivalent). Google opens a screen where you can choose **which Google account** to use (if you use more than one), then approve read-only mail access for this extension.
 
 4. **Read your status**  
    You should see that you are **Connected**. If not, connect again or check that you completed sign-in.
@@ -31,11 +31,14 @@ It does **not** send mail, delete mail, or change your account. It only **looks 
 7. **Refresh**  
    When a **new** email arrives, tap **Refresh** so the list updates from Gmail. The list does not update by itself in the background while the popup is closed.
 
-8. **Light / dark theme**  
+8. **Switch account**  
+   While connected, tap **Switch account**. This clears the extension’s saved Google session for this tool, then opens Chrome’s normal Google sign-in flow so you can approve access again—often with a **different Google account** if your browser has several.
+
+9. **Light / dark theme**  
    Use the **sun / moon** button in the header to switch appearance. Your choice is remembered on this browser.
 
-9. **Disconnect**  
-   Use **Disconnect** when you want to sign out from Gmail inside the extension and clear that session from this tool. You can connect again later.
+10. **Sign out**  
+    Tap **Sign out** to remove Gmail access for this extension and clear its cached tokens, without signing in to another account right away. Use **Connect Gmail** again when you want back in.
 
 ---
 
@@ -70,5 +73,6 @@ The extension is built as a **Chrome Extension** using **Manifest V3** (modern e
 
 ## Tips
 
+- If you see **Error 400: redirect_uri_mismatch** after an update, reload the extension from a fresh build; sign-in should use Chrome’s built-in OAuth tied to your manifest (no manual redirect URL).
 - If a code **does not appear**, it may not match the search words yet, or the message may use an unusual format. You can still open **Gmail** as usual.
 - You need an **internet connection** for Connect, Refresh, and loading codes.

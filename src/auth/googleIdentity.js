@@ -1,4 +1,9 @@
-/** Uses oauth2 client_id and scopes from manifest.json (Chrome merges them for getAuthToken). */
+/**
+ * Uses oauth2 client_id and scopes from manifest.json.
+ * Sign-in: chrome.identity.getAuthToken (Chrome-managed redirect).
+ */
+
+export const OTP_SESSION_CLEARED_KEY = 'otp_quick_access_session_cleared'
 
 function isExtensionPage() {
   try {
@@ -40,26 +45,59 @@ function assertChromeIdentity() {
   }
 }
 
-export function getInteractiveAuthToken() {
+function normalizeGetAuthTokenResult(result) {
+  if (result == null) {
+    return null
+  }
+  if (typeof result === 'string') {
+    return result || null
+  }
+  if (typeof result === 'object' && result !== null && 'token' in result) {
+    return result.token ?? null
+  }
+  return null
+}
+
+/** Marks user session active so we may restore a cached token on next popup open. */
+export async function markSessionActive() {
+  await chrome.storage.local.remove(OTP_SESSION_CLEARED_KEY)
+}
+
+async function markSessionClearedIntent() {
+  await chrome.storage.local.set({ [OTP_SESSION_CLEARED_KEY]: true })
+}
+
+/** Cached token without UI (fails quietly). */
+export function getSilentAuthToken() {
   assertChromeIdentity()
-  return new Promise((resolve, reject) => {
-    chrome.identity.getAuthToken({ interactive: true }, (token) => {
+  return new Promise((resolve) => {
+    chrome.identity.getAuthToken({ interactive: false }, (result) => {
       if (chrome.runtime.lastError) {
-        reject(new Error(chrome.runtime.lastError.message))
+        resolve(null)
         return
       }
-      resolve(token ?? null)
+      resolve(normalizeGetAuthTokenResult(result))
     })
   })
 }
 
-export function removeCachedAuthToken(token) {
+/** Interactive OAuth using manifest oauth2. */
+export function getInteractiveAuthToken() {
   assertChromeIdentity()
   return new Promise((resolve, reject) => {
-    if (!token) {
-      resolve()
-      return
-    }
+    chrome.identity.getAuthToken({ interactive: true }, (result) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError.message))
+        return
+      }
+      resolve(normalizeGetAuthTokenResult(result))
+    })
+  })
+}
+
+function removeCachedAuthTokenPromise(token) {
+  assertChromeIdentity()
+  return new Promise((resolve, reject) => {
     chrome.identity.removeCachedAuthToken({ token }, () => {
       if (chrome.runtime.lastError) {
         reject(new Error(chrome.runtime.lastError.message))
@@ -68,4 +106,57 @@ export function removeCachedAuthToken(token) {
       resolve()
     })
   })
+}
+
+function clearAllCachedAuthTokensPromise() {
+  assertChromeIdentity()
+  return new Promise((resolve, reject) => {
+    if (typeof chrome.identity.clearAllCachedAuthTokens !== 'function') {
+      resolve()
+      return
+    }
+    chrome.identity.clearAllCachedAuthTokens(() => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError.message))
+        return
+      }
+      resolve()
+    })
+  })
+}
+
+/** Invalidate token at Google (best-effort; avoids sticky cached grants). */
+async function revokeGoogleAccessToken(accessToken) {
+  if (!accessToken) return
+  const controller = new AbortController()
+  const t = setTimeout(() => controller.abort(), 8000)
+  try {
+    await fetch('https://oauth2.googleapis.com/revoke', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ token: accessToken }).toString(),
+      signal: controller.signal,
+    })
+  } catch {
+    /* offline / already revoked */
+  } finally {
+    clearTimeout(t)
+  }
+}
+
+/**
+ * Fully clears extension Google session: revoke + remove cached token + clear identity cache.
+ * Pass the current access token when you have it (sign-out / switch account).
+ */
+export async function clearGoogleSession(accessToken) {
+  await revokeGoogleAccessToken(accessToken ?? '')
+  if (accessToken) {
+    try {
+      await removeCachedAuthTokenPromise(accessToken)
+    } catch {
+      /* stale token */
+    }
+  }
+  await clearAllCachedAuthTokensPromise()
+  await markSessionClearedIntent()
 }

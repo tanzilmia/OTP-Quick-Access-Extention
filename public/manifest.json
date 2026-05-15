@@ -23,7 +23,10 @@
     "service_worker": "background.js"
   },
   "permissions": ["identity", "storage", "alarms"],
-  "host_permissions": ["https://www.googleapis.com/*"],
+  "host_permissions": [
+    "https://www.googleapis.com/*",
+    "https://oauth2.googleapis.com/*"
+  ],
   "oauth2": {
     "client_id": "560091804566-s9e6m8fd54tha37epmv4bhmkdh82glpr.apps.googleusercontent.com",
     "scopes": ["https://www.googleapis.com/auth/gmail.readonly"]

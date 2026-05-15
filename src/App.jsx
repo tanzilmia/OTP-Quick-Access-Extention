@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
-import { getInteractiveAuthToken, removeCachedAuthToken } from './auth/googleIdentity'
+import {
+  clearGoogleSession,
+  getInteractiveAuthToken,
+  getSilentAuthToken,
+  markSessionActive,
+  OTP_SESSION_CLEARED_KEY,
+} from './auth/googleIdentity'
 import { fetchRecentOtps } from './gmail/fetchRecentOtps'
 import { ErrorBanner } from './components/ErrorBanner'
 import { GmailConnectionCard } from './components/GmailConnectionCard'
@@ -41,12 +47,14 @@ export default function App() {
       if (!token) {
         throw new Error('No OAuth token returned.')
       }
+      await markSessionActive()
       setAuthToken(token)
       await loadOtpsFromGmail(token)
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err)
       setError(message)
       setAuthToken(null)
+      setOtps([])
     } finally {
       setConnecting(false)
     }
@@ -54,16 +62,41 @@ export default function App() {
 
   const handleDisconnectGmail = useCallback(async () => {
     setError(null)
+    const token = authToken
+    setAuthToken(null)
+    setOtps([])
     try {
-      await removeCachedAuthToken(authToken)
+      await clearGoogleSession(token ?? undefined)
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err)
       setError(message)
-      return
     }
+  }, [authToken])
+
+  const handleSwitchAccount = useCallback(async () => {
+    setError(null)
+    const token = authToken
+    setConnecting(true)
     setAuthToken(null)
     setOtps([])
-  }, [authToken])
+    try {
+      await clearGoogleSession(token ?? undefined)
+      const newToken = await getInteractiveAuthToken()
+      if (!newToken) {
+        throw new Error('No OAuth token returned.')
+      }
+      await markSessionActive()
+      setAuthToken(newToken)
+      await loadOtpsFromGmail(newToken)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err)
+      setError(message)
+      setAuthToken(null)
+      setOtps([])
+    } finally {
+      setConnecting(false)
+    }
+  }, [authToken, loadOtpsFromGmail])
 
   const handleRefreshOtps = useCallback(async () => {
     if (!authToken) {
@@ -81,6 +114,29 @@ export default function App() {
     commitTheme(theme)
   }, [theme])
 
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const stored = await chrome.storage.local.get(OTP_SESSION_CLEARED_KEY)
+        if (stored[OTP_SESSION_CLEARED_KEY] || cancelled) {
+          return
+        }
+        const token = await getSilentAuthToken()
+        if (!token || cancelled) {
+          return
+        }
+        setAuthToken(token)
+        await loadOtpsFromGmail(token)
+      } catch {
+        /* ignore restore failures */
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [loadOtpsFromGmail])
+
   const toggleTheme = useCallback(() => {
     setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
   }, [])
@@ -94,6 +150,7 @@ export default function App() {
         loading={loading}
         onConnect={handleConnectGmail}
         onDisconnect={handleDisconnectGmail}
+        onSwitchAccount={handleSwitchAccount}
         onRefresh={handleRefreshOtps}
       />
       <div className="app-main">

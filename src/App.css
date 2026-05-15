@@ -8,10 +8,10 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 0 14px 16px;
+  gap: 8px;
+  padding: 0 12px 12px;
 }
 
 .app-alert-slot {
-  margin-top: 2px;
+  margin-top: 0;
 }

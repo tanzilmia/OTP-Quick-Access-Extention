@@ -23,15 +23,17 @@ export function GmailConnectionCard({
               Inactive
             </p>
           </div>
+          <div className="gcard-actions">
+            <button
+              type="button"
+              className="gcard-connect"
+              onClick={onConnect}
+              disabled={connecting}
+            >
+              {connecting ? 'Connecting…' : 'Connect Gmail'}
+            </button>
+          </div>
         </div>
-        <button
-          type="button"
-          className="gcard-connect"
-          onClick={onConnect}
-          disabled={connecting}
-        >
-          {connecting ? 'Connecting…' : 'Connect Gmail'}
-        </button>
       </div>
     )
   }

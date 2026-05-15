@@ -1,6 +1,6 @@
 .gcard {
-  margin: 0 14px;
-  padding: 14px;
+  margin: 0 12px;
+  padding: 10px 12px;
   border-radius: var(--radius);
   background: linear-gradient(165deg, #142922 0%, var(--surface) 55%);
   border: 1px solid var(--border-strong);
@@ -8,13 +8,13 @@
 }
 
 .gcard-live {
-  padding-bottom: 12px;
+  padding-bottom: 10px;
 }
 
 .gcard-inner {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .gcard-inner-muted {
@@ -24,6 +24,8 @@
 .gcard-google-svg {
   flex-shrink: 0;
   display: block;
+  width: 28px;
+  height: 28px;
 }
 
 .gcard-logo-slot {
@@ -38,14 +40,14 @@
 
 .gcard-status-title {
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 650;
   color: var(--text);
 }
 
 .gcard-status-tag {
-  margin: 4px 0 0;
-  font-size: 12px;
+  margin: 2px 0 0;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-muted);
   display: flex;
@@ -73,18 +75,18 @@
 .gcard-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
   margin-left: auto;
 }
 
 .gbtn-disconnect {
-  padding: 7px 10px;
-  border-radius: 8px;
+  padding: 5px 8px;
+  border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--bg-panel);
   color: var(--text-muted);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 650;
   cursor: pointer;
   transition:
@@ -102,13 +104,13 @@
 .gbtn-refresh {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 11px;
-  border-radius: 8px;
+  gap: 4px;
+  padding: 5px 9px;
+  border-radius: 6px;
   border: 1px solid rgba(16, 185, 129, 0.55);
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   cursor: pointer;
   transition:
@@ -130,23 +132,26 @@
 }
 
 .gbtn-refresh-icon {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
 }
 
 .gcard-connect {
-  margin-top: 12px;
-  width: 100%;
-  padding: 11px 14px;
+  margin-top: 0;
+  width: auto;
+  flex-shrink: 0;
+  align-self: center;
+  padding: 6px 11px;
   border-radius: var(--radius-sm);
   border: none;
   background: linear-gradient(180deg, #22c55e 0%, #059669 100%);
   color: #052e22;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 750;
   letter-spacing: 0.02em;
+  white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.28);
   transition:
     filter 0.15s ease,
     opacity 0.15s ease,

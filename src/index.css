@@ -20,9 +20,9 @@
   --danger-bg: rgba(239, 68, 68, 0.12);
   --danger-text: #f87171;
 
-  --radius: 12px;
-  --radius-sm: 10px;
-  --radius-icon: 10px;
+  --radius: 10px;
+  --radius-sm: 8px;
+  --radius-icon: 8px;
 
   font-family:
     system-ui,
@@ -30,8 +30,8 @@
     'Segoe UI',
     Roboto,
     sans-serif;
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 13px;
+  line-height: 1.4;
   color: var(--text);
   background: var(--bg);
 }

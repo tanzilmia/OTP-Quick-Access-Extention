@@ -1,4 +1,31 @@
-.list {
+.otp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.otp-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 2px 2px 0;
+}
+
+.otp-section-label {
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.otp-section-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.otp-list {
   list-style: none;
   margin: 0;
   padding: 0;

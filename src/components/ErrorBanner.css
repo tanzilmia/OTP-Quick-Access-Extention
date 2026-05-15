@@ -1,13 +1,14 @@
 .root {
-  margin: 0 16px;
-  padding: 10px 12px;
+  padding: 11px 13px;
   border-radius: var(--radius-sm);
   background: var(--danger-bg);
   color: var(--danger-text);
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 500;
   display: flex;
   gap: 10px;
   align-items: flex-start;
+  border: 1px solid rgba(248, 113, 113, 0.22);
 }
 
 .message {
@@ -23,9 +24,9 @@
   background: transparent;
   color: inherit;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0.85;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.9;
 }
 
 .dismiss:hover {

@@ -1,9 +1,8 @@
 import { useCallback, useState } from 'react'
 import { getInteractiveAuthToken, removeCachedAuthToken } from './auth/googleIdentity'
 import { fetchRecentOtps } from './gmail/fetchRecentOtps'
-import { ActionButtons } from './components/ActionButtons'
-import { ConnectionStatus } from './components/ConnectionStatus'
 import { ErrorBanner } from './components/ErrorBanner'
+import { GmailConnectionCard } from './components/GmailConnectionCard'
 import { Header } from './components/Header'
 import { OtpList } from './components/OtpList'
 import './App.css'
@@ -81,22 +80,19 @@ export default function App() {
   return (
     <div className="app">
       <Header />
-      <ConnectionStatus connected={gmailConnected} />
+      <GmailConnectionCard
+        connected={gmailConnected}
+        connecting={connecting}
+        loading={loading}
+        onConnect={handleConnectGmail}
+        onDisconnect={handleDisconnectGmail}
+        onRefresh={handleRefreshOtps}
+      />
       <div className="app-main">
-        <ActionButtons
-          gmailConnected={gmailConnected}
-          connecting={connecting}
-          onConnectGmail={handleConnectGmail}
-          onDisconnectGmail={handleDisconnectGmail}
-          onRefreshOtps={handleRefreshOtps}
-          refreshDisabled={loading || connecting || !gmailConnected}
-        />
-        <ErrorBanner message={error} onDismiss={handleDismissError} />
-
-        <div>
-          <h2 className="app-section-title">Recent codes</h2>
-          <OtpList otps={otps} loading={loading} />
+        <div className="app-alert-slot">
+          <ErrorBanner message={error} onDismiss={handleDismissError} />
         </div>
+        <OtpList otps={otps} loading={loading} />
       </div>
     </div>
   )

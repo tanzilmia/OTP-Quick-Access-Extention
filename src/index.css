@@ -1,21 +1,28 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
-  --bg: #f8f9fb;
-  --bg-elevated: #ffffff;
-  --text: #111827;
-  --text-muted: #6b7280;
-  --border: #e5e7eb;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-muted: rgba(37, 99, 235, 0.12);
-  --danger-bg: rgba(220, 38, 38, 0.08);
-  --danger-text: #b91c1c;
-  --success-dot: #22c55e;
-  --muted-dot: #9ca3af;
+  /* Emerald auth UI (matches reference) */
+  --bg: #090c0b;
+  --bg-panel: #0f1614;
+  --surface: #141f1c;
+  --surface-hover: #1a2924;
+  --text: #f4faf8;
+  --text-muted: #8b9d96;
+  --text-dim: #5c6f67;
+  --border: #243530;
+  --border-strong: rgba(16, 185, 129, 0.45);
+
+  --accent: #10b981;
+  --accent-hover: #34d399;
+  --accent-soft: rgba(16, 185, 129, 0.12);
+  --accent-muted: rgba(16, 185, 129, 0.22);
+
+  --danger-bg: rgba(239, 68, 68, 0.12);
+  --danger-text: #f87171;
+
   --radius: 12px;
-  --radius-sm: 8px;
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --radius-sm: 10px;
+  --radius-icon: 10px;
 
   font-family:
     system-ui,
@@ -29,22 +36,6 @@
   background: var(--bg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f1117;
-    --bg-elevated: #181b24;
-    --text: #f3f4f6;
-    --text-muted: #9ca3af;
-    --border: #2d3340;
-    --accent: #60a5fa;
-    --accent-hover: #93c5fd;
-    --accent-muted: rgba(96, 165, 250, 0.18);
-    --danger-bg: rgba(248, 113, 113, 0.12);
-    --danger-text: #fca5a5;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-  }
-}
-
 *,
 *::before,
 *::after {
@@ -55,10 +46,12 @@ body {
   margin: 0;
   min-width: 360px;
   max-width: 360px;
+  background: var(--bg);
 }
 
 #root {
   min-height: 100%;
+  background: var(--bg);
 }
 
 button {

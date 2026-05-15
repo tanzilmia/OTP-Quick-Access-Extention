@@ -1,0 +1,34 @@
+.root {
+  margin: 0 16px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--danger-bg);
+  color: var(--danger-text);
+  font-size: 13px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.message {
+  margin: 0;
+  flex: 1;
+}
+
+.dismiss {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.dismiss:hover {
+  opacity: 1;
+  text-decoration: underline;
+}

@@ -1,0 +1,20 @@
+# Netlify configuration for the OTP Quick Access landing site.
+# The site is a static folder (no build step) living in /landing.
+
+[build]
+  publish = "landing"
+  command = ""
+
+# Optional clean URL: /privacy -> /privacy.html
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+# Security headers for a static marketing site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

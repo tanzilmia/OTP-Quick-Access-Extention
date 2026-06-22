@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Quick Access — One-time codes from Gmail, instantly</title>
+    <meta
+      name="description"
+      content="OTP Quick Access is a Chrome extension that reads your Gmail (read-only) and surfaces recent one-time verification codes in one click. Your email never leaves your browser."
+    />
+    <meta name="theme-color" content="#090c0b" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="OTP Quick Access — One-time codes from Gmail, instantly" />
+    <meta
+      property="og:description"
+      content="Stop digging through your inbox for verification codes. Read-only, private, and processed entirely on your device."
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ============ NAV ============ -->
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top" aria-label="OTP Quick Access home">
+          <span class="brand-badge" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="7.5" cy="15.5" r="3.5" /><path d="m21 2-9.6 9.6" /><path d="m15.5 7.5 3 3L22 7l-3-3" />
+            </svg>
+          </span>
+          <span>
+            OTP Quick Access
+            <span class="brand-sub">Gmail Authenticator</span>
+          </span>
+        </a>
+        <nav class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#permissions">Permissions</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="btn btn-primary btn-sm" href="#install">Add to Chrome</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <div class="wrap">
+        <!-- ============ HERO ============ -->
+        <section class="hero" style="padding-top: 72px">
+          <div>
+            <span class="pill"><span class="dot"></span> Read-only · Private · Manifest V3</span>
+            <h1>Your verification codes, one click away.</h1>
+            <p class="lead">
+              OTP Quick Access scans your recent Gmail for one-time passcodes and
+              shows the latest ones the moment you open the popup — so you never
+              dig through your inbox during a login again.
+            </p>
+            <div class="hero-cta" id="install">
+              <a class="btn btn-primary" href="#" aria-label="Add OTP Quick Access to Chrome">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M21.17 8H12M3.95 6.06 8.54 14M10.88 21.94 15.46 14"/></svg>
+                Add to Chrome
+              </a>
+              <a class="btn btn-ghost" href="#how">See how it works</a>
+            </div>
+            <p class="hero-note">
+              Free · No account or sign-up · Works with your existing Google sign-in
+            </p>
+          </div>
+
+          <!-- Popup mockup -->
+          <div class="mock" role="img" aria-label="Preview of the OTP Quick Access popup showing a recent code">
+            <div class="mock-hdr">
+              <div class="mock-hdr-brand">
+                <span class="mock-key" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="3.5" /><path d="m21 2-9.6 9.6" /><path d="m15.5 7.5 3 3L22 7l-3-3" /></svg>
+                </span>
+                <div>
+                  <div class="mock-title">OTP Quick Access</div>
+                  <div style="font-size: 11px; color: var(--text-muted)">Gmail Authenticator</div>
+                </div>
+              </div>
+              <div class="mock-icons">
+                <span class="mock-iconbtn" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                </span>
+                <span class="mock-iconbtn" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+                </span>
+              </div>
+            </div>
+            <div class="mock-status">
+              <span class="dot"></span> Connected
+            </div>
+            <div class="mock-section-label"><span>Recent codes</span><span>1 found</span></div>
+            <div class="mock-otp">
+              <div class="mock-otp-top">
+                <span class="mock-otp-from">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  Stripe <span class="mock-tag">NEW</span>
+                </span>
+                <span class="mock-copy">Copy</span>
+              </div>
+              <div class="mock-digits"><span>4</span><span>8</span><span>2</span><span>9</span><span>1</span><span>5</span></div>
+              <div class="mock-time">Today · 4:26 PM</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============ FEATURES ============ -->
+      <section id="features">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Why you'll like it</span>
+            <h2>Built to get out of your way</h2>
+            <p>One job, done well: pull the code you need and let you copy it fast.</p>
+          </div>
+          <div class="grid">
+            <div class="card">
+              <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+              <h3>Instant codes</h3>
+              <p>Open the popup and your latest one-time codes are already there, newest first. Tap <strong>Copy</strong> and paste.</p>
+            </div>
+            <div class="card">
+              <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <h3>Read-only & private</h3>
+              <p>Only read access to Gmail is requested. Codes are extracted on your device — nothing is uploaded, stored, or shared.</p>
+            </div>
+            <div class="card">
+              <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+              <h3>Smart detection</h3>
+              <p>Provider-aware parsing recognizes codes from Google, Apple, banks and more — while ignoring years, ZIP codes and order numbers.</p>
+            </div>
+            <div class="card">
+              <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></span>
+              <h3>One-tap refresh</h3>
+              <p>A new code just arrived? Hit <strong>Refresh</strong> to pull the latest messages straight from Gmail.</p>
+            </div>
+            <div class="card">
+              <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
+              <h3>Light & dark</h3>
+              <p>A clean popup that matches your taste. Switch themes anytime — your choice is remembered on this browser.</p>
+            </div>
+            <div class="card">
+              <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <h3>Easy account switch</h3>
+              <p>Use more than one inbox? Switch the connected Google account or sign out and clear the session in a click.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ HOW IT WORKS ============ -->
+      <section id="how">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">How it works</span>
+            <h2>Connected in under a minute</h2>
+            <p>No new password to remember — it uses Chrome's built-in Google sign-in.</p>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <h3>Install</h3>
+              <p>Add OTP Quick Access from the Chrome Web Store and pin it to your toolbar.</p>
+            </div>
+            <div class="step">
+              <h3>Connect Gmail</h3>
+              <p>Click the icon, choose <strong>Connect Gmail</strong>, and approve read-only access for your account.</p>
+            </div>
+            <div class="step">
+              <h3>See your codes</h3>
+              <p>Recent one-time codes appear in the popup, newest first, with the sender and time.</p>
+            </div>
+            <div class="step">
+              <h3>Copy & go</h3>
+              <p>Tap <strong>Copy</strong> on the code you need and paste it into the site or app.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRIVACY ============ -->
+      <section id="privacy">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Privacy first</span>
+            <h2>Your email stays your email</h2>
+            <p>The extension is designed so your inbox content never leaves your device.</p>
+          </div>
+          <div class="privacy">
+            <ul>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span><strong>Read-only access.</strong> Only the <code style="white-space:normal">gmail.readonly</code> scope is requested — it can't send, delete, or modify mail.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span><strong>On-device processing.</strong> Messages are fetched from Google and parsed inside the popup. Code extraction happens locally.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span><strong>No servers, no tracking.</strong> There is no backend. Your email content is never uploaded to us or any third party.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span><strong>You're in control.</strong> Sign out anytime to revoke access and clear the cached session from your browser.</span>
+              </li>
+            </ul>
+            <div class="callout">
+              <strong>Limited Use disclosure.</strong> OTP Quick Access's use and transfer of
+              information received from Google APIs adheres to the
+              <a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes" target="_blank" rel="noopener">Google API Services User Data Policy</a>,
+              including the Limited Use requirements. Gmail data is used solely to display
+              your one-time codes in the popup and is never transferred elsewhere, used for
+              advertising, or read by humans.
+            </div>
+            <p style="margin: 22px 0 0; font-size: 15px; color: var(--text-muted)">
+              Read the full <a href="privacy.html">Privacy Policy</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PERMISSIONS ============ -->
+      <section id="permissions">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Transparency</span>
+            <h2>Every permission, explained</h2>
+            <p>Here's exactly what the extension asks for and why it needs it.</p>
+          </div>
+          <table class="perm">
+            <thead>
+              <tr><th style="width: 220px">Permission</th><th>Why it's needed</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>gmail.readonly</code></td>
+                <td>Search recent messages and read their content to find one-time verification codes. Read access only — no sending or editing.</td>
+              </tr>
+              <tr>
+                <td><code>identity</code></td>
+                <td>Lets you sign in to Google through Chrome's secure OAuth flow so the extension can obtain a read-only access token.</td>
+              </tr>
+              <tr>
+                <td><code>storage</code></td>
+                <td>Remembers your sign-out state so the session doesn't silently restore after you choose to disconnect.</td>
+              </tr>
+              <tr>
+                <td><code>googleapis.com</code> host access</td>
+                <td>Allows the popup to talk directly to Google's Gmail API over HTTPS. No other websites are accessed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section id="faq">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">FAQ</span>
+            <h2>Good questions</h2>
+          </div>
+          <div class="faq">
+            <details>
+              <summary>Does this extension store or send my emails anywhere?</summary>
+              <p>No. There is no server behind the extension. Messages are requested from Google's Gmail API and parsed inside the popup on your own device. Your email content is never uploaded to us or shared with any third party.</p>
+            </details>
+            <details>
+              <summary>Can it send email or change my account?</summary>
+              <p>No. It requests only the read-only Gmail scope, which technically cannot send, delete, label, or modify anything in your mailbox.</p>
+            </details>
+            <details>
+              <summary>How far back does it look for codes?</summary>
+              <p>It searches messages from roughly the last 7 days that match verification-style keywords, then shows the most recent codes it can confidently identify.</p>
+            </details>
+            <details>
+              <summary>Why didn't a code show up?</summary>
+              <p>Some emails use unusual formatting, or the message may not match the search keywords. You can still open Gmail as usual. The extension also deliberately ignores look-alike numbers such as years, ZIP codes, and order numbers to avoid showing the wrong value.</p>
+            </details>
+            <details>
+              <summary>How do I disconnect?</summary>
+              <p>Click the sign-out icon in the popup header. This revokes the access token and clears the cached session from your browser. You can reconnect anytime, or use <strong>Switch account</strong> to connect a different Google account.</p>
+            </details>
+            <details>
+              <summary>Does it update automatically while closed?</summary>
+              <p>No. The list refreshes when you open the popup or tap <strong>Refresh</strong>. It does not poll your inbox in the background.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CTA ============ -->
+      <section style="padding-top: 0">
+        <div class="wrap">
+          <div class="cta">
+            <h2>Stop hunting for codes.</h2>
+            <p>Add OTP Quick Access and grab your next verification code in one click.</p>
+            <a class="btn btn-primary" href="#" aria-label="Add OTP Quick Access to Chrome">Add to Chrome — it's free</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+      <div class="wrap foot-inner">
+        <div>© <span id="year">2026</span> OTP Quick Access. Not affiliated with Google LLC. Gmail is a trademark of Google LLC.</div>
+        <div class="foot-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="#permissions">Permissions</a>
+          <a href="mailto:support@example.com">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
-import { IconKey, IconMoon, IconSun } from './icons'
+import { IconKey, IconLogout, IconMoon, IconSun } from './icons'
 import './Header.css'
 
-export function Header({ theme, onToggleTheme }) {
+export function Header({ theme, onToggleTheme, connected, onDisconnect }) {
   const isDark = theme === 'dark'
   return (
     <header className="hdr">
@@ -14,19 +14,32 @@ export function Header({ theme, onToggleTheme }) {
           <p className="hdr-sub">Gmail Authenticator</p>
         </div>
       </div>
-      <button
-        type="button"
-        className="hdr-settings"
-        aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-        title={isDark ? 'Light mode' : 'Dark mode'}
-        onClick={onToggleTheme}
-      >
-        {isDark ? (
-          <IconSun className="hdr-settings-icon" />
-        ) : (
-          <IconMoon className="hdr-settings-icon" />
+      <div className="hdr-actions">
+        <button
+          type="button"
+          className="hdr-settings"
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          title={isDark ? 'Light mode' : 'Dark mode'}
+          onClick={onToggleTheme}
+        >
+          {isDark ? (
+            <IconSun className="hdr-settings-icon" />
+          ) : (
+            <IconMoon className="hdr-settings-icon" />
+          )}
+        </button>
+        {connected && (
+          <button
+            type="button"
+            className="hdr-settings hdr-signout"
+            onClick={onDisconnect}
+            title="Sign out and remove Gmail access for this extension"
+            aria-label="Sign out"
+          >
+            <IconLogout className="hdr-settings-icon" />
+          </button>
         )}
-      </button>
+      </div>
     </header>
   )
 }

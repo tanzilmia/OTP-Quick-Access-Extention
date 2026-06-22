@@ -45,6 +45,34 @@ function isLikelyCalendarYear(digits) {
   return n >= 1900 && n <= 2099
 }
 
+/** Street suffixes that mark a digit run as a street number, not an OTP */
+const STREET_SUFFIX_RE =
+  /^\s+(?:[\w'.&-]+\s+){0,3}(?:street|st|avenue|ave|road|rd|boulevard|blvd|lane|ln|drive|dr|parkway|pkwy|highway|hwy|court|ct|place|pl|square|sq|suite|ste|floor|fl)\b/i
+
+/**
+ * True when a digit run sits inside a postal address (street number, ZIP code).
+ * Footer boilerplate like "1600 Amphitheatre Parkway, Mountain View, CA 94043, USA"
+ * is not an OTP even though it contains 4–8 digit runs.
+ * @param {{ text: string, index: number }} o
+ * @param {string} haystack
+ */
+function isLikelyPostalAddress(o, haystack) {
+  const start = o.index
+  const end = o.index + o.text.length
+  const before = haystack.slice(Math.max(0, start - 40), start)
+  const after = haystack.slice(end, end + 40)
+
+  // Street number directly before a street name + suffix ("1600 Amphitheatre Parkway")
+  if (STREET_SUFFIX_RE.test(after)) return true
+
+  // US ZIP: "CA 94043", "94043, USA", "94043-1234"
+  if (o.text.length === 5) {
+    if (/\b[A-Z]{2}[\s,]+$/.test(before)) return true
+    if (/^(?:-\d{4})?\s*,?\s*(?:USA|United\s+States)\b/i.test(after)) return true
+  }
+  return false
+}
+
 /**
  * Digit groups with common separators (123-456, 12 34 56, 123.456.789).
  * Collapsed to a plain digit run for scoring.
@@ -94,7 +122,7 @@ const OTP_CONTEXT_RE =
   /otp|one[\s-]?time|verification|verify|confirm(?:ation)?|password|pin(?!\w)|security code|login code|authentication|passcode|sign[-\s]in(?:\s+code)?|2fa|\bmfa\b|multi[\s-]?factor|two[\s-]?factor|authenticat|securely\s+log|log\s+in|enter\s+(?:the\s+)?(?:code|pin|digits|number|one[\s-]time)/i
 
 const FOOTERISH_RE =
-  /\b(tel|phone|whatsapp|contact\s+us|address|unsubscribe|follow\s+us|copyright)\b/i
+  /\b(tel|phone|whatsapp|contact\s+us|address|unsubscribe|follow\s+us|copyright|all\s+rights\s+reserved|llc|inc)\b|©/i
 
 /**
  * @param {{ text: string, index: number }} o
@@ -184,8 +212,10 @@ function pickBestFromHaystack(haystack, hints) {
   }
   if (occurrences.length === 0) return null
 
-  const nonYears = occurrences.filter((o) => !isLikelyCalendarYear(o.text))
-  const pool = nonYears.length > 0 ? nonYears : occurrences
+  const nonNoise = occurrences.filter(
+    (o) => !isLikelyCalendarYear(o.text) && !isLikelyPostalAddress(o, haystack),
+  )
+  const pool = nonNoise.length > 0 ? nonNoise : occurrences
 
   pool.sort(
     (a, b) => scoreCandidate(b, haystack, hints) - scoreCandidate(a, haystack, hints),

@@ -143,7 +143,12 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header theme={theme} onToggleTheme={toggleTheme} />
+      <Header
+        theme={theme}
+        onToggleTheme={toggleTheme}
+        connected={gmailConnected}
+        onDisconnect={handleDisconnectGmail}
+      />
       <GmailConnectionCard
         connected={gmailConnected}
         connecting={connecting}

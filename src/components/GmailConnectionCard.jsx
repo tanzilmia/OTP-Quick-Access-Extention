@@ -6,7 +6,6 @@ export function GmailConnectionCard({
   connecting,
   loading,
   onConnect,
-  onDisconnect,
   onSwitchAccount,
   onRefresh,
 }) {
@@ -49,15 +48,6 @@ export function GmailConnectionCard({
           </p>
         </div>
         <div className="gcard-actions">
-          <button
-            type="button"
-            className="gbtn-disconnect"
-            onClick={onDisconnect}
-            title="Sign out and remove Gmail access for this extension"
-            aria-label="Sign out"
-          >
-            Sign out
-          </button>
           <button
             type="button"
             className="gbtn-switch"

@@ -30,3 +30,32 @@ jobs:
         run: npm run lint
       - name: Build
         run: npm run build
+
+  code_quality:
+    # SonarQube Community Edition analyzes the main branch only, so scan on
+    # push (post-merge) — never on pull requests.
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Full history so SonarQube can attribute issues by SCM blame.
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - name: Install dependencies
+        run: npm ci
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@7006c4492b2e0ee0f816d36501671557c97f5995
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=devinside-cmrov275v000101phmvb19mr6-tanzilmia-OTP-Quick-Access-Extention
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.qualitygate.timeout=300
